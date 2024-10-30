@@ -1,204 +1,319 @@
-/* 9000819 Devansh Mistry | Pestal Theme */
-
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
 
 *,
 *::before,
 *::after {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 :root {
-    --primary-color: #112B76; 
-    --secondary-color: #112BC4;
-    --focus-color:  #007bff;
-    --family1: "IBM Plex Sans", sans-serif;
-    --bg1: linear-gradient(to right,
-            #f7c6a8 0%,  
-            #f9d9b5 20%, 
-            #d9e6c8 40%, 
-            #a7c6ed 75%, 
-            #d4ccd0 100%);
+  --primary-color: #112b76;
+  --secondary-color: #112bc4;
+  --focus-color: #007bff;
+  --button-color: #4caf50;
+  --button-hover-color: #3e8e41;
+  --edit-button-color: #007bff;
+  --edit-button-hover-color: #0056b3;
+  --family1: 'IBM Plex Sans', sans-serif;
+  --bg1: linear-gradient(
+    to right,
+    #f7c6a8 0%,
+    #f9d9b5 20%,
+    #d9e6c8 40%,
+    #a7c6ed 75%,
+    #d4ccd0 100%
+  );
 }
 
-
 body {
-    display: grid;
-    grid-template-rows: 10vh auto 10vh;
-    margin: 0;
-    font-family: var(--family1);
-    background: var(--bg1);
-    color: var(--primary-color);
+  display: grid;
+  grid-template-rows: 10vh auto 10vh;
+  margin: 0;
+  font-family: var(--family1);
+  background: var(--bg1);
+  color: var(--primary-color);
+  font-size: 1rem;
+  line-height: 1.5;
 }
 
 header {
-    grid-row: 1 / 2;
-    width: 100%;
-    justify-self: center;
-    align-self: center;
-    text-align: center;
-    background: linear-gradient(175deg, #e8ecff 0%, #e6e4f9 40%, #e5d7f6 100%) !important;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    display: grid;
-    place-items: center;
+  grid-row: 1 / 2;
+  width: 100%;
+  justify-self: center;
+  align-self: center;
+  text-align: center;
+  background: linear-gradient(
+    175deg,
+    #e8ecff 0%,
+    #e6e4f9 40%,
+    #e5d7f6 100%
+  ) !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: grid;
+  place-items: center;
 }
 
-footer{
-    grid-row: 3 / 4;
-    width: 100%;
-    justify-self: center;
-    text-align: center;
-    font-weight: 600;
-    background: linear-gradient(175deg, #e8ecff 0%, #e6e4f9 40%, #e5d7f6 100%) !important;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
-    display: grid;
-    place-items: center;
+header h1 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+footer {
+  grid-row: 3 / 4;
+  width: 100%;
+  justify-self: center;
+  text-align: center;
+  font-weight: 600;
+  background: linear-gradient(
+    175deg,
+    #e8ecff 0%,
+    #e6e4f9 40%,
+    #e5d7f6 100%
+  ) !important;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+  display: grid;
+  place-items: center;
 }
 
 main {
-    grid-row: 2 / 3;
+  grid-row: 2 / 3;
 }
 
-section{
-    margin: 5vh 5vw;
-    padding: 2vh 2vw;
+section {
+  margin: 5vh 5vw;
+  padding: 2vh 2vw;
 }
 
 .content {
-    display: grid;
-    grid-template-columns: 3fr 2fr;
-    padding: 2vw 2vh;
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  padding: 2vw 2vh;
 }
 
 .left-col {
-    grid-column: 1 / 2;
-    margin-right: 2vw;
-    padding: 1vw;
+  grid-column: 1 / 2;
+  margin-right: 2vw;
+  padding: 1vw;
 }
 
 .right-col {
-    grid-column: 2 / 3;
+  grid-column: 2 / 3;
 }
-
 
 /* -----------left-col-------------- */
 
-
 .card {
-    background: rgba(255, 255, 255, 0.5);
-    backdrop-filter: blur(1.25rem);
-    -webkit-backdrop-filter: blur(1.25rem);
-    border: none;
-    border-radius: .5rem !important;
-    margin-bottom: 0;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(1.25rem);
+  -webkit-backdrop-filter: blur(1.25rem);
+  border: none;
+  border-radius: 0.5rem !important;
+  margin-bottom: 0;
 }
 
 .card-body {
-    color: #58585e;
-    background-color: rgba(255, 255, 255, 0.5);
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    padding: 1.75rem;
-    border: none;
-    border-top: 0.0625rem solid #f1f2f3;
-    border-radius: .5rem;
+  color: #58585e;
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  padding: 1.75rem;
+  border: none;
+  border-top: 0.0625rem solid #f1f2f3;
+  border-radius: 0.5rem;
 }
 
 #task-list {
-    margin-bottom: 1vh;
+  margin-bottom: 1vh;
 }
 
 .task {
-    border: 0.0625rem solid #ccc;
-    padding: 1vw;
-    margin-bottom: 1vh;
+  border: 0.0625rem solid #ccc;
+  padding: 1.5vw;
+  margin-bottom: 1.5vh;
+  transition: border-color 0.3s ease, transform 0.2s ease;
+  border-radius: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.task:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .task-description {
-    font-weight: bold;
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--primary-color);
+}
+
+.task-assigned-to,
+.task-due-date,
+.task-priority,
+.task-status {
+  font-size: 1.1rem;
+  margin-top: 0.5vh;
 }
 
 .task-assigned-to {
-    color: blue;
+  color: var(--primary-color);
 }
 
 .task-due-date {
-    color: green;
+  color: var(--primary-color);
 }
 
-.task-priority {
-    color: red;
+/* Additional styles for edit button */
+.edit-button,
+.delete-button {
+  margin-top: 1vh;
+  padding: 0.5em 1em;
+  border-radius: 0.3rem;
+  color: white;
 }
 
-.task-status {
-    color: orange;
+.edit-button {
+  background-color: var(--edit-button-color);
 }
 
+.delete-button {
+  background-color: #f44336;
+}
 
+.edit-button:hover,
+.delete-button:hover {
+  opacity: 0.8;
+}
 
-/* --------right-col------------ */ 
+/* --------right-col------------ */
 
 .search-container {
-    margin: 1.5vw;
+  margin-bottom: 2vh;
 }
 
-input{
-    margin: 0;
-    font-family: inherit;
-    font-size: inherit;
-    line-height: inherit;
-    padding: 0.5em; 
-    border: none; 
-    border-radius: 0.3rem; 
-    background-color: #ffffff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.search-container button {
+  background-color: var(--button-color);
+  color: white;
+  border: none;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  padding: 0.5em;
+  margin-right: 0.5em;
 }
 
-button, select {
-    margin: 0;
-    font-family: inherit;
-    font-size: inherit;
-    line-height: inherit;
-    padding: 0.5em; 
-    border: none; 
-    border-radius: 0.3rem;
-    cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.search-container button:hover {
+  background-color: var(--button-hover-color);
+}
+
+input {
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  padding: 0.5em;
+  border: none;
+  border-radius: 0.3rem;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+button,
+select {
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  padding: 0.5em;
+  border: none;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 input:focus,
 button:focus,
 select:focus {
-    outline: none;
-    box-shadow: 0 0 5px var(--secondary-color);
+  outline: none;
+  box-shadow: 0 0 5px var(--secondary-color);
 }
 
-
 .add-task-container {
-    border: 0.0625rem solid #9e9e9e;
-    padding: 1.25rem;
-    padding-top: 0rem;
+  border: 0.0625rem solid #9e9e9e;
+  padding: 1.25rem;
+  padding-top: 0rem;
 }
 
 .add-task-container label {
-    display: block;
-    margin-bottom: 1vh;
+  display: block;
+  margin-bottom: 1vh;
 }
 
 .add-task-container input,
 .add-task-container select {
-    width: 100%;
-    padding: 5px;
-    margin-bottom: 2vh;
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 2vh;
 }
 
 .add-task-container button {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    cursor: pointer;
+  background-color: var(--button-color);
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 0.5em 1em;
 }
 
 .add-task-container button:hover {
-    background-color: #3e8e41;
+  background-color: var(--button-hover-color);
+}
+
+button {
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+.add-task-container button {
+  background-color: var(--button-color);
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.add-task-container button:hover {
+  background-color: var(--button-hover-color);
+}
+
+.add-task-container h2 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 1vh;
+}
+
+#task-list {
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .content {
+    grid-template-columns: 1fr;
+  }
+
+  .left-col {
+    grid-column: 1 / 2;
+  }
+
+  .right-col {
+    grid-column: 1 / 2;
+  }
+
+  #task-list {
+    margin-bottom: 5vh;
+  }
 }

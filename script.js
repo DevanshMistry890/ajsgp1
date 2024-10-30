@@ -1,74 +1,182 @@
-$(document).ready(function() {
-    const taskListElement = $('#task-list');
-    const searchInput = $('#search-input');
-    const searchButton = $('#search-button');
-    const addTaskForm = $('#add-task-form');
-    const taskDescriptionInput = $('#task-description');
-    const assignedToInput = $('#assigned-to');
-    const dueDateInput = $('#due-date');
-    const priorityInput = $('#priority');
-    const statusInput = $('#status');
+$(document).ready(() => {
+  // DOM Elements Module
+  const createElementsModule = () => ({
+    taskList: $('#task-list'),
+    searchInput: $('#search-input'),
+    searchButton: $('#search-button'),
+    clearButton: $('#clear-button'),
+    addTaskForm: $('#add-task-form'),
+    inputs: {
+      description: $('#task-description'),
+      assignedTo: $('#assigned-to'),
+      dueDate: $('#due-date'),
+      priority: $('#priority'),
+      status: $('#status'),
+    },
+  });
 
+  // Colors Module
+  const createColorsModule = () => ({
+    priority: {
+      high: 'red',
+      medium: 'orange',
+      low: 'green',
+      default: '#ccc',
+    },
+    status: {
+      'not started': 'gray',
+      'in progress': 'blue',
+      completed: 'green',
+      default: '#ccc',
+    },
+    getForPriority(priority) {
+      return this.priority[priority] || this.priority.default;
+    },
+    getForStatus(status) {
+      return this.status[status] || this.status.default;
+    },
+  });
+
+  // Task Manager Factory
+  const createTaskManager = () => {
+    const elements = createElementsModule();
+    const colors = createColorsModule();
     let tasks = [];
+    let editIndex = -1;
 
-    // Load tasks from localStorage on page load
-    const storedTasks = localStorage.getItem('tasks');
-    if (storedTasks) {
-        tasks = JSON.parse(storedTasks);
-        displayTasks();
-    }
 
-    // Add task to list and localStorage
-    addTaskForm.submit(function(event) {
-        event.preventDefault();
-        const task = {
-            description: taskDescriptionInput.val(),
-            assignedTo: assignedToInput.val(),
-            dueDate: dueDateInput.val(),
-            priority: priorityInput.val(),
-            status: statusInput.val()
-        };
+    const loadTasks = () => {
+      const storedTasks = localStorage.getItem('tasks');
+      tasks = storedTasks ? JSON.parse(storedTasks) : [];
+    };
+
+    const saveTasks = () => {
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+    };
+
+    const getTaskFromInputs = () => ({
+      description: elements.inputs.description.val(),
+      assignedTo: elements.inputs.assignedTo.val(),
+      dueDate: elements.inputs.dueDate.val(),
+      priority: elements.inputs.priority.val(),
+      status: elements.inputs.status.val(),
+    });
+
+    const displayEmptyMessage = () => {
+      elements.taskList.append(
+        '<div class="no-tasks-message" style="text-align: center;">' +
+          'No tasks available. Please add a task.</div>'
+      );
+    };
+
+    const getFilteredTasks = () => {
+      const searchTerm = elements.searchInput.val().toLowerCase();
+      return searchTerm
+        ? tasks.filter(
+            (task) =>
+              task.description.toLowerCase().includes(searchTerm) ||
+              task.assignedTo.toLowerCase().includes(searchTerm)
+          )
+        : tasks;
+    };
+
+    const getTaskHTML = (task) => `
+      <div class="task-description">Description: ${task.description}</div>
+      <div class="task-assigned-to">Assigned to: ${task.assignedTo}</div>
+      <div class="task-due-date">Due Date: ${task.dueDate}</div>
+      <div class="task-priority" style="color: ${colors.getForPriority(
+        task.priority
+      )};">
+        Priority: ${task.priority}
+      </div>
+      <div class="task-status" style="color: ${colors.getForStatus(
+        task.status
+      )};">
+        Status: ${task.status}
+      </div>
+      <button class="edit-button">Edit</button>
+      <button class="delete-button">Delete</button>
+    `;
+
+    const handleTaskSubmit = (event) => {
+      event.preventDefault();
+      const task = getTaskFromInputs();
+
+      if (editIndex === -1) {
         tasks.push(task);
-        localStorage.setItem('tasks', JSON.stringify(tasks));
-        displayTasks();
-        $(this).trigger('reset');
-    });
+      } else {
+        tasks[editIndex] = task;
+        editIndex = -1;
+      }
 
-    // Display tasks in the list
-    function displayTasks() {
-        taskListElement.empty();
-        const filteredTasks = searchInput.val() ? tasks.filter(task => task.description.toLowerCase().includes(searchInput.val().toLowerCase()) || task.assignedTo.toLowerCase().includes(searchInput.val().toLowerCase())) : tasks;
-        filteredTasks.forEach((task, index) => {
-            const taskElement = $('<div class="task card-body"></div>');
-            taskElement.html(`
-                <div class="task-description">${task.description}</div>
-                <div class="task-assigned-to">Assigned to: ${task.assignedTo}</div>
-                <div class="task-due-date">Due Date: ${task.dueDate}</div>
-                <div class="task-priority">Priority: ${task.priority}</div>
-                <div class="task-status">Status: ${task.status}</div>
-                <button class="delete-button">Delete</button>
-            `);
-            taskElement.find('.delete-button').click(function() {
-                deleteTask(index);
-            });
-            taskListElement.append(taskElement);
-        });
-    }
+      saveTasks();
+      displayTasks();
+      elements.addTaskForm.trigger('reset');
+    };
 
-    // Delete task from list and localStorage
-    function deleteTask(index) {
-        tasks.splice(index, 1);
-        localStorage.setItem('tasks', JSON.stringify(tasks));
-        displayTasks();
-    }
+    const handleEdit = (index) => {
+      const task = tasks[index];
+      Object.entries(elements.inputs).forEach(([key, input]) => {
+        input.val(task[key]);
+      });
+      editIndex = index;
+    };
 
-    // Search for tasks
-    searchButton.click(function() {
-        displayTasks();
-    });
+    const handleDelete = (index) => {
+      tasks.splice(index, 1);
+      saveTasks();
+      displayTasks();
+    };
 
-    $('#clear-button').click(function() {
-        $('#search-input').val('');
+    const createTaskElement = (task, index) => {
+      const taskElement = $('<div class="task card-body"></div>').css(
+        'border-color',
+        colors.getForPriority(task.priority)
+      );
+
+      taskElement.html(getTaskHTML(task));
+
+      // Event binding
+      taskElement.find('.edit-button').click(() => handleEdit(index));
+      taskElement.find('.delete-button').click(() => handleDelete(index));
+
+      elements.taskList.append(taskElement);
+    };
+
+    const displayTasks = () => {
+      elements.taskList.empty();
+
+      if (tasks.length === 0) {
+        displayEmptyMessage();
+        return;
+      }
+
+      const filteredTasks = getFilteredTasks();
+      filteredTasks.forEach((task, index) => createTaskElement(task, index));
+    };
+
+    // Initialize
+    const init = () => {
+      loadTasks();
+
+      // Bind events
+      elements.addTaskForm.submit(handleTaskSubmit);
+      elements.searchButton.click(displayTasks);
+      elements.clearButton.click(() => {
+        elements.searchInput.val('');
         displayTasks();
-    });
+      });
+
+      displayTasks();
+    };
+
+
+    return {
+      init,
+    };
+  };
+
+  // Create and initialize task manager
+  const taskManager = createTaskManager();
+  taskManager.init();
 });
