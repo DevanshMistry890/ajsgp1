@@ -57,14 +57,14 @@ $(document).ready(function () {
     }
     const filteredTasks = searchInput.val()
       ? tasks.filter(
-          (task) =>
-            task.description
-              .toLowerCase()
-              .includes(searchInput.val().toLowerCase()) ||
-            task.assignedTo
-              .toLowerCase()
-              .includes(searchInput.val().toLowerCase())
-        )
+        (task) =>
+          task.description
+            .toLowerCase()
+            .includes(searchInput.val().toLowerCase()) ||
+          task.assignedTo
+            .toLowerCase()
+            .includes(searchInput.val().toLowerCase())
+      )
       : tasks;
 
     filteredTasks.forEach((task, index) => {
@@ -73,22 +73,14 @@ $(document).ready(function () {
         getPriorityColor(task.priority)
       );
       taskElement.html(`
-                <div class="task-description">Description: ${
-                  task.description
-                }</div>
-                <div class="task-assigned-to">Assigned to: ${
-                  task.assignedTo
-                }</div>
+                <div class="task-description">Description: ${task.description}</div>
+                <div class="task-assigned-to">Assigned to: ${task.assignedTo}</div>
                 <div class="task-due-date">Due Date: ${task.dueDate}</div>
-                <div class="task-priority" style="color: ${getPriorityColor(
-                  task.priority
-                )};">Priority: ${task.priority}</div>
-                <div class="task-status" style="color: ${getStatusColor(
-                  task.status
-                )};">Status: ${task.status}</div>
+                <div class="task-priority" style="color: ${getPriorityColor(task.priority)};">Priority: ${task.priority}</div>
+                <div class="task-status" style="color: ${getStatusColor(task.status)};">Status: ${task.status}</div>
                 <button class="edit-button">Edit</button>
                 <button class="delete-button">Delete</button>
-            `);
+        `);
       taskElement.find('.edit-button').click(function () {
         editTask(index);
       });
