@@ -1,62 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="icon.svg" type="image/svg+xml" />
     <title>Task Manager</title>
-    <meta name="title" content="Task-Management">
-    <meta name="description" content="Simple App for Manage Task for Group With Javascript">
-    <meta name="author" content="Devansh">
-    <link rel="stylesheet" href="style.css">
-</head>
+    <meta name="title" content="Task-Management" />
+    <meta
+      name="description"
+      content="Simple App for Manage Task for Group With Javascript"
+    />
+    <meta name="author" content="Group 7 Javascript Project" />
+    <link
+      rel="stylesheet"
+      href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-<body>
+  <body>
     <header>
-        <h1> Task Manager </h1>
+      <h1>Task Manager</h1>
     </header>
     <main>
-        <section class="content">            
-            <div id="task-list" class="left-col card"></div>
-            <div class="right-col">
-                <div class="search-container">
-                    <input type="text" id="search-input" placeholder="Search tasks...">
-                    <button id="search-button">Search</button>
-                    <button id="clear-button">Clear</button>
-                </div>
-                <div class="add-task-container right-col">
-                    <h2>Add Task</h2>
-                    <form id="add-task-form">
-                        <label for="task-description">Description:</label>
-                        <input type="text" id="task-description" required>
-                        <label for="assigned-to">Assigned to:</label>
-                        <input type="text" id="assigned-to" required>
-                        <label for="due-date">Due Date:</label>
-                        <input type="date" id="due-date">
-                        <label for="priority">Priority:</label>
-                        <select id="priority">
-                            <option value="low">Low</option>
-                            <option value="medium">Medium</option>
-                            <option value="high">High</option>
-                        </select>
-                        <label for="status">Status:</label>
-                        <select id="status">
-                            <option value="not started">Not Started</option>
-                            <option value="in progress">In Progress</option>
-                            <option value="completed">Completed</option>
-                        </select>
-                        <button type="submit">Add Task</button>
-                    </form>
-                </div>
-            </div>
-        </section>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-        <script src="script.js"></script>
+      <section class="content">
+        <div id="task-list" class="left-col card"></div>
+        <div class="right-col">
+          <div class="search-container">
+            <input
+              type="text"
+              id="search-input"
+              placeholder="Search tasks..."
+            />
+            <button id="search-button">Search</button>
+            <button id="clear-button">Clear</button>
+          </div>
+          <div class="add-task-container">
+            <h2>Add Task</h2>
+            <form id="add-task-form">
+              <label for="task-description">Description:</label>
+              <input type="text" id="task-description" required />
+              <label for="assigned-to">Assigned to:</label>
+              <input type="text" id="assigned-to" required />
+              <label for="due-date">Due Date:</label>
+              <input type="date" id="due-date" />
+              <label for="priority">Priority:</label>
+              <select id="priority" class="dropdown">
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+              </select>
+              <label for="status">Status:</label>
+              <select id="status" class="dropdown">
+                <option value="not started">Not Started</option>
+                <option value="in progress">In Progress</option>
+                <option value="completed">Completed</option>
+              </select>
+              <button type="submit">Save</button>
+            </form>
+          </div>
+        </div>
+      </section>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+      <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+
+      <script src="script.js"></script>
     </main>
     <footer>
-        <p> &copy; 2024 Devansh Mistry | 9000819 </p>
+      <p>&copy; Group 7 Project | 2024</p>
     </footer>
-</body>
-
+  </body>
 </html>
