@@ -11,6 +11,10 @@
       content="Simple App for Manage Task for Group With Javascript"
     />
     <meta name="author" content="Group 7 Javascript Project" />
+    <link
+      rel="stylesheet"
+      href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"
+    />
     <link rel="stylesheet" href="style.css" />
   </head>
 
@@ -41,13 +45,13 @@
               <label for="due-date">Due Date:</label>
               <input type="date" id="due-date" />
               <label for="priority">Priority:</label>
-              <select id="priority">
+              <select id="priority" class="dropdown">
                 <option value="low">Low</option>
                 <option value="medium">Medium</option>
                 <option value="high">High</option>
               </select>
               <label for="status">Status:</label>
-              <select id="status">
+              <select id="status" class="dropdown">
                 <option value="not started">Not Started</option>
                 <option value="in progress">In Progress</option>
                 <option value="completed">Completed</option>
@@ -58,6 +62,8 @@
         </div>
       </section>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+      <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+
       <script src="script.js"></script>
     </main>
     <footer>
