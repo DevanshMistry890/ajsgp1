@@ -344,3 +344,22 @@ button:hover {
     margin-bottom: 5vh;
   }
 }
+
+@keyframes flash {
+  0% {
+    opacity: 1;
+    color: black;
+  }
+  50% {
+    opacity: 0.5;
+    color: red;
+  }
+  100% {
+    opacity: 1;
+    color: black;
+  }
+}
+
+.flash {
+  animation: flash 1s infinite;
+}

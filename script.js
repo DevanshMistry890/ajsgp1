@@ -12,6 +12,7 @@ $(document).ready(function () {
   const dueDateInput = $('#due-date');
   const priorityInput = $('#priority');
   const statusInput = $('#status');
+  const headinglbl = $('#heading'); 
 
   let tasks = [];
   let editIndex = -1;
@@ -35,14 +36,18 @@ $(document).ready(function () {
     };
 
     if (editIndex === -1) {
+      // Add a new task
       tasks.push(task);
     } else {
+      // Edit an existing task & reset label
       tasks[editIndex] = task;
+      headinglbl.text('Add Task').removeClass('flash');
       editIndex = -1;
     }
 
     localStorage.setItem('tasks', JSON.stringify(tasks));
     displayTasks();
+    
     $(this).trigger('reset');
   });
 
@@ -93,6 +98,8 @@ $(document).ready(function () {
 
   // Edit task
   function editTask(index) {
+
+    headinglbl.text('Edit task here').addClass('flash'); //Edit msg and adds animation to grab user attention.
     const task = tasks[index];
     taskDescriptionInput.val(task.description);
     assignedToInput.val(task.assignedTo);
@@ -100,6 +107,7 @@ $(document).ready(function () {
     priorityInput.val(task.priority);
     statusInput.val(task.status);
     editIndex = index;
+
   }
 
   // Delete task from list and localStorage
