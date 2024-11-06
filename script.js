@@ -1,3 +1,5 @@
+/* Group 7 AJS Project */
+
 $(document).ready(function () {
 
   const taskListElement = $('#task-list');
@@ -97,7 +99,7 @@ $(document).ready(function () {
   function editTask(index) {
 
     //Edit msg and adds animation to grab user attention
-    headinglbl.text('Edit task here').addClass('flash'); 
+    headinglbl.text('Edit task here').addClass('flash');
     $('html, body').animate({
       scrollTop: headinglbl.offset().top
     }, 'slow'); //scroll user to label
@@ -125,6 +127,7 @@ $(document).ready(function () {
     displayTasks();
   });
 
+  // clear filter and show all task
   $('#clear-button').click(function () {
     $('#search-input').val('');
     displayTasks();
