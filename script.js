@@ -1,7 +1,4 @@
 $(document).ready(function () {
-  $(function () {
-    $('#priority, #status').selectmenu();
-  });
 
   const taskListElement = $('#task-list');
   const searchInput = $('#search-input');
@@ -12,7 +9,7 @@ $(document).ready(function () {
   const dueDateInput = $('#due-date');
   const priorityInput = $('#priority');
   const statusInput = $('#status');
-  const headinglbl = $('#heading'); 
+  const headinglbl = $('#heading');
 
   let tasks = [];
   let editIndex = -1;
@@ -47,7 +44,7 @@ $(document).ready(function () {
 
     localStorage.setItem('tasks', JSON.stringify(tasks));
     displayTasks();
-    
+
     $(this).trigger('reset');
   });
 
@@ -99,7 +96,13 @@ $(document).ready(function () {
   // Edit task
   function editTask(index) {
 
-    headinglbl.text('Edit task here').addClass('flash'); //Edit msg and adds animation to grab user attention.
+    //Edit msg and adds animation to grab user attention
+    headinglbl.text('Edit task here').addClass('flash'); 
+    $('html, body').animate({
+      scrollTop: headinglbl.offset().top
+    }, 'slow'); //scroll user to label
+
+
     const task = tasks[index];
     taskDescriptionInput.val(task.description);
     assignedToInput.val(task.assignedTo);
@@ -135,7 +138,7 @@ $(document).ready(function () {
       case 'medium':
         return '#FFA500';
       case 'low':
-        return '#90EE90';
+        return '#40ec2d';
       default:
         return '#CCCCCC';
     }
