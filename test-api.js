@@ -42,6 +42,7 @@ async function testAPI() {
     console.log(colors.green('Created first task:'), createResponse.data);
     console.log(colors.green('Created second task:'), secondResponse.data);
     const taskId = createResponse.data.id;
+    const secondTaskId = secondResponse.data.id;
 
     // Get all tasks
     printHeader('Getting all tasks');
@@ -69,18 +70,32 @@ async function testAPI() {
     const searchResponse = await axios.get(`${API_URL}/search?query=jane`);
     console.log(colors.green('Search results:'), searchResponse.data, '\n', colors.yellow('Total tasks:'), searchResponse.data.length);
 
-    // Delete task
-    printHeader('Deleting task');
-    const deleteResponse = await axios.delete(`${API_URL}/${taskId}`);
-    console.log(colors.green('Delete status:'), deleteResponse.status);
+    // Delete tasks
+    printHeader('Deleting tasks');
+    const deleteResponse1 = await axios.delete(`${API_URL}/${taskId}`);
+    const deleteResponse2 = await axios.delete(`${API_URL}/${secondTaskId}`);
+    console.log(colors.green('Delete status for task 1:'), deleteResponse1.status);
+    console.log(colors.green('Delete status for task 2:'), deleteResponse2.status);
 
     // Verify deletion
     printHeader('Verifying deletion');
     try {
       await axios.get(`${API_URL}/${taskId}`);
+      console.log(colors.red('Error: First task still exists'));
     } catch (error) {
       if (error.response && error.response.status === 404) {
-        console.log(colors.green('Task successfully deleted (404 response)'));
+        console.log(colors.green('First task successfully deleted (404 response)'));
+      } else {
+        throw error;
+      }
+    }
+
+    try {
+      await axios.get(`${API_URL}/${secondTaskId}`);
+      console.log(colors.red('Error: Second task still exists'));
+    } catch (error) {
+      if (error.response && error.response.status === 404) {
+        console.log(colors.green('Second task successfully deleted (404 response)'));
       } else {
         throw error;
       }
