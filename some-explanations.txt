@@ -1,0 +1,13 @@
+// Delete this file after before submitting the project
+
+why i used classes and static methods?
+[instead of functional programming or regular functions exported from modules]
+
+static methods:
+- All operations are stateless and don't require instance-specific data.
+- Tasks share the same JSON data source.
+- There's no need for instance variables or maintaining state between operations or requests.
+- Each request is handled independently, so static methods are more memory-efficient by avoiding unnecessary instantiations.
+
+class:
+- It's mostly about improving organization and clarity, not object-oriented features.
