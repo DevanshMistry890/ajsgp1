@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<%-include('layouts/head.ejs');-%>
+    <body>
+        <header>
+            <h1>Task Manager</h1>
+        </header>
+        <main>
+            <section class="content">
+                <div id="task-list" class="left-col card"></div>
+                <div class="right-col">
+                    <div class="search-container">
+                        <input type="text" id="search-input" placeholder="Search tasks...">
+                        <button id="search-button">Search</button>
+                        <button id="clear-button">Clear</button>
+                    </div>
+                    <div class="add-task-container">
+                        <h2 id="heading">Add Task</h2>
+                        <form id="add-task-form">
+                            <label for="task-description">Description:</label>
+                            <input type="text" id="task-description" required>
+                            <label for="assigned-to">Assigned to:</label>
+                            <input type="text" id="assigned-to" required>
+                            <label for="due-date">Due Date:</label>
+                            <input type="date" id="due-date">
+                            <label for="priority">Priority:</label>
+                            <select id="priority" class="dropdown" name="priority">
+                                <option value="low">Low</option>
+                                <option value="medium">Medium</option>
+                                <option value="high">High</option>
+                            </select>
+                            <label for="status">Status:</label>
+                            <select id="status" class="dropdown">
+                                <option value="not started">Not Started</option>
+                                <option value="in progress">In Progress</option>
+                                <option value="completed">Completed</option>
+                            </select>
+                            <button type="submit">Save</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <%-include('layouts/footer.ejs');-%>
+    </body>
+</html>
