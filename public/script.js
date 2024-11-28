@@ -1,4 +1,4 @@
-/* Group 7 AJS Project */
+/* Group 7 AJS Project 2*/
 
 $(document).ready(function () {
 
@@ -39,21 +39,21 @@ $(document).ready(function () {
       // Add a new task
       $.post('/api/tasks', task, function () {
         loadTasks();
-        $(this).trigger('reset');
+        $('#add-task-form').trigger('reset');
       }).fail(function () {
         alert('Failed to create task');
       });
     } else {
       // Edit an existing task
       $.ajax({
-        url: '/api/tasks/${editIndex}',
+        url: `/api/tasks/${editIndex}`,
         method: 'PUT',
         data: task,
         success: function () {
           loadTasks();
           headinglbl.text('Add Task').removeClass('flash');
           editIndex = -1;
-          $(this).trigger('reset');
+          $('#add-task-form').trigger('reset');
         },
         fail: function () {
           alert('Failed to update task');
@@ -109,13 +109,14 @@ $(document).ready(function () {
 
   // Edit task
   function editTask(taskId) {
+    console.log(taskId);
     //Edit msg and adds animation to grab user attention
     headinglbl.text('Edit task here').addClass('flash');
     $('html, body').animate({
       scrollTop: headinglbl.offset().top
     }, 'slow'); //scroll user to label
 
-    $.get('/api/tasks/${taskId}', function (task) {
+    $.get(`/api/tasks/${taskId}`, function (task) {
       taskDescriptionInput.val(task.description);
       assignedToInput.val(task.assignedTo);
       dueDateInput.val(task.dueDate);
@@ -130,7 +131,7 @@ $(document).ready(function () {
   // Delete task from list via API
   function deleteTask(taskId) {
     $.ajax({
-      url: '/api/tasks/${taskId}',
+      url: `/api/tasks/${taskId}`,
       method: 'DELETE',
       success: function () {
         loadTasks();
