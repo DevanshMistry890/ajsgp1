@@ -1,1 +1,20 @@
-[]
+[
+  {
+    "id": "1732867924271",
+    "description": "Implement API Endpoint",
+    "assignedTo": "James",
+    "dueDate": "2024-12-01",
+    "priority": "high",
+    "status": "not started",
+    "createdAt": "2024-11-29T18:00:24.271Z"
+  },
+  {
+    "id": "1732871593764",
+    "description": "Prepare Monthly Report",
+    "assignedTo": "Laura",
+    "dueDate": "2024-11-28",
+    "priority": "medium",
+    "status": "completed",
+    "createdAt": "2024-11-29T19:15:39.764Z"
+  }
+]

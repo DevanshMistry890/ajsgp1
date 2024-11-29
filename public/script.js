@@ -71,19 +71,7 @@ $(document).ready(function () {
       );
       return;
     }
-    const filteredTasks = searchInput.val()
-      ? tasks.filter(
-        (task) =>
-          task.description
-            .toLowerCase()
-            .includes(searchInput.val().toLowerCase()) ||
-          task.assignedTo
-            .toLowerCase()
-            .includes(searchInput.val().toLowerCase())
-      )
-      : tasks;
-
-    filteredTasks.forEach((task, index) => {
+    tasks.forEach((task, index) => {
       const taskElement = $('<div class="task card-body"></div>').css(
         'border-color',
         getPriorityColor(task.priority)
@@ -109,7 +97,6 @@ $(document).ready(function () {
 
   // Edit task
   function editTask(taskId) {
-    console.log(taskId);
     //Edit msg and adds animation to grab user attention
     headinglbl.text('Edit task here').addClass('flash');
     $('html, body').animate({
@@ -144,7 +131,7 @@ $(document).ready(function () {
 
   // Search for tasks
   searchButton.click(function () {
-    let query = $('#search-input').val();
+    let query = searchInput.val();
     $.get('/api/tasks/search', { query: query }, function (tasks) {
       displayTasks(tasks);
     }).fail(function () {
